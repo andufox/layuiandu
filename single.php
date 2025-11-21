@@ -23,8 +23,14 @@
                 </div>
             </div>
         </div>
-        <?php comments_template(); ?>
+        
     </article>
+    <div class="layui-card">
+        <div class="layui-card-header"><h3 id="comments">评论</h3></div>
+        <div class="layui-card-body">
+            <?php comments_template(); ?>
+        </div>
+    </div>
 <?php endwhile; endif; ?>
 
 <?php get_footer(); ?>

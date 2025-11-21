@@ -22,11 +22,6 @@ add_action('wp_enqueue_scripts', function () {
     $accent = '#1a73e8';
     wp_add_inline_style('andu-style', ':root{--accent:' . esc_attr($accent) . '}');
     wp_enqueue_script('andu-layui', $layui_js, [], $js_ver, true);
-    $theme_js_path = get_template_directory() . '/assets/theme.js';
-    if (file_exists($theme_js_path)) {
-        wp_enqueue_script('andu-script', get_template_directory_uri() . '/assets/theme.js', [], wp_get_theme()->get('Version'), true);
-        wp_add_inline_script('andu-script', 'window.anduDefaultDark=true;', 'before');
-    }
 });
 
 // content width
@@ -44,25 +39,6 @@ function layuiandu_menu_fallback() {
     wp_page_menu(['show_home' => true]);
     echo '</div>';
 }
-
-// local avatar replace
-add_filter('get_avatar_url', function ($url, $id_or_email, $args) {
-    $size = isset($args['size']) ? intval($args['size']) : 96;
-    $size = max(32, min(256, $size));
-    $avatar_path = get_template_directory() . '/assets/avatar.php';
-    if (!file_exists($avatar_path)) { return $url; }
-    return get_template_directory_uri() . '/assets/avatar.php?size=' . $size;
-}, 10, 3);
-
-add_filter('get_avatar_data', function ($data, $id_or_email) {
-    $size = isset($data['size']) ? intval($data['size']) : 96;
-    $size = max(32, min(256, $size));
-    $avatar_path = get_template_directory() . '/assets/avatar.php';
-    if (!file_exists($avatar_path)) { return $data; }
-    $data['url'] = get_template_directory_uri() . '/assets/avatar.php?size=' . $size;
-    $data['found_avatar'] = true;
-    return $data;
-}, 10, 2);
 
 add_filter('get_avatar', function ($html, $id_or_email, $size, $default, $alt, $args) {
     if (is_object($id_or_email) && $id_or_email instanceof WP_Comment) { return ''; }
@@ -145,6 +121,10 @@ add_filter('comment_form_default_fields', function ($fields) {
     return $fields;
 });
 
+add_filter('comments_open', function($open, $post_id){
+    return true;
+}, 99, 2);
+
 function andu_render_pagination() {
     global $wp_query;
     if (!$wp_query) return;
@@ -219,7 +199,7 @@ add_action('init', function () {
 
 add_action('init', function () {
     if (get_option('andu_seed_posts20_done')) { return; }
-    $need = 20;
+    $need = 4;
     $existing = wp_count_posts('post');
     $existing_count = isset($existing->publish) ? intval($existing->publish) : 0;
     if ($existing_count >= $need) { update_option('andu_seed_posts20_done', 1); return; }

@@ -10,10 +10,16 @@
             <?php if (is_active_sidebar('sidebar-1')) { dynamic_sidebar('sidebar-1'); } ?>
         </aside>
     </div>
+    <div class="layui-fixbar">
+        <a href="#" class="layui-icon layui-icon-top layui-fixbar-top" id="andu-back-top" style="display:none"></a>
+    </div>
     <footer class="footer">
         <div>© <?php echo date('Y'); ?> <?php bloginfo('name'); ?> · Powered by WordPress · <a href="https://github.com/andufox/layuiandu">Theme: Layui.Andu</a></div>
     </footer>
 </div>
 <?php wp_footer(); ?>
+<script>
+(function(){var b=document.getElementById('andu-back-top');if(!b){return}function t(){if(window.scrollY>200){b.style.display='block'}else{b.style.display='none'}}t();window.addEventListener('scroll',t);b.addEventListener('click',function(e){e.preventDefault();window.scrollTo({top:0,behavior:'smooth'})});})();
+</script>
 </body>
 </html>

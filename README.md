@@ -1,4 +1,4 @@
-# Layui.Andu
+# LayuiAndu
 
 以 Layui 框架为基础的极简 WordPress 博客主题，专注内容阅读体验与基础功能的稳健实现。
 
@@ -6,7 +6,7 @@
 
 ## 截图
 
-![Layui.Andu 截图](./screenshot.png)
+![LayuiAndu 截图](./screenshot.png)
 
 ## 特性
 
@@ -20,8 +20,9 @@
 ## 安装
 
 - 将主题文件夹 `layuiandu` 放入 `wp-content/themes/`
-- 在 WordPress 后台的“外观 → 主题”中启用 Layui.Andu
+- 在 WordPress 后台的“外观 → 主题”中启用 LayuiAndu
 - 如需本地加载 Layui，可在 `assets/vendor/layui/` 放置 `layui.css` 与 `layui.js`，或替换最新版的layui样式和js文件
+- 当前使用layui 2.13.2 版本，建议保持最新版以获取最新功能与安全修复。[layui 官方下载链接](https://layui.dev/)
 
 ## 使用建议
 
