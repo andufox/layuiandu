@@ -3,7 +3,7 @@ Theme Name: LayuiAndu
 Theme URI: https://github.com/andufox/layuiandu
 Author: Andu
 Description: 基于 Layui 的极简博客主题
-Version: 0.6.3
+Version: 0.7.1
 License: GPL-2.0-or-later
 Text Domain: layuiandu
 */
@@ -40,6 +40,12 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helve
 .footer { margin-top: 40px; color: #777; font-size: 14px; border-top: 1px solid #eee; padding-top: 16px; }
 
 .layui-nav { background: transparent; }
+.layui-nav .layui-nav-item > a { color: #333; }
+.layui-nav .layui-nav-child a { color: #333; }
+.layui-nav .layui-this > a,
+.layui-nav a[aria-current="page"] { background: #16baaa; color: #fff; font-weight: 600; }
+.layui-nav .layui-nav-item > a:hover,
+.layui-nav .layui-nav-child a:hover { color: #fff; background: #16baaa; opacity: .95; }
 .layui-card-header h1, .layui-card-header h2 { margin: 0; }
 .layui-card-header { height: auto; line-height: 1.5; }
 .layui-card-header .post-title { display: block; margin-bottom: 8px; line-height: 1.3; }
@@ -75,7 +81,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helve
 .single h3#comments, .page h3#comments { color: #999; font-weight: 500; }
 .comment-list, .commentlist { list-style: none; padding: 0; margin: 0; }
 .comment-list li.comment, .commentlist li.comment { border: 1px solid #eee; border-radius: 4px; padding: 10px; margin-bottom: 10px; }
-.comment-list .children, .commentlist .children { margin-left: 4px; }
+.comment-list .children, .commentlist .children { margin-left: 0; padding-left: 0; }
 .comment-list .children li.comment, .commentlist .children li.comment { border-color: #f2f2f2; }
 .single .comment-meta, .single .comment-meta a, .page .comment-meta, .page .comment-meta a { color: #999; }
 .single .comment-body .avatar { display: none; }
@@ -90,15 +96,15 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helve
 .comment-list li.depth-2 .comment-content p, .commentlist li.depth-2 .comment-content p { padding-left: 12px; }
 .comment-list li.depth-3 .comment-content p, .commentlist li.depth-3 .comment-content p { padding-left: 24px; }
 .comment-list li.depth-4 .comment-content p, .commentlist li.depth-4 .comment-content p { padding-left: 36px; }
-.comment-list li.depth-2 .comment-body, .commentlist li.depth-2 .comment-body { border-left: 1px solid #eee; padding-left: 2px; margin-left: 2px; }
-.comment-list li.depth-3 .comment-body, .commentlist li.depth-3 .comment-body { border-left-color: #e6e6e6; margin-left: 24px; padding-left: 12px; }
-.comment-list li.depth-4 .comment-body, .commentlist li.depth-4 .comment-body { border-left-color: #ddd; margin-left: 36px; padding-left: 12px; }
+.comment-list li.depth-2 .comment-body, .commentlist li.depth-2 .comment-body { border-left: none !important; padding-left: 0 !important; margin-left: 0 !important; }
+.comment-list li.depth-3 .comment-body, .commentlist li.depth-3 .comment-body { border-left: none !important; margin-left: 0 !important; padding-left: 0 !important; }
+.comment-list li.depth-4 .comment-body, .commentlist li.depth-4 .comment-body { border-left: none !important; margin-left: 0 !important; padding-left: 0 !important; }
 
 /* depth color palette */
 .comment-list li.depth-1.comment, .commentlist li.depth-1.comment { border-color: #5FB878; }
 .comment-list li.depth-2.comment, .commentlist li.depth-2.comment { border-color: #a6d8ff; }
 .comment-list li.depth-3.comment, .commentlist li.depth-3.comment { border-color: #ffb199; }
-.comment-list li.depth-4.comment, .commentlist li.depth-4.comment { border-color: #cde8d6; }
+.comment-list li.depth-4.comment, .commentlist li.depth-4.comment { border-color: #16baaa; }
 .comment-list li.depth-5.comment, .commentlist li.depth-5.comment { border-color: #e1bee7; }
 
 .comment-list li.depth-1 .comment-body, .commentlist li.depth-1 .comment-body { border-left-color: #e0e0e0; }
@@ -107,26 +113,34 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helve
 .comment-list li.depth-4 .comment-body, .commentlist li.depth-4 .comment-body { border-left-color: #cde8d6; }
 .comment-list li.depth-5 .comment-body, .commentlist li.depth-5 .comment-body { border-left-color: #e1bee7; }
 .comment-list .comment-body, .commentlist .comment-body { border-left: none !important; }
+.comment-list .comment-body, .commentlist .comment-body { margin-left: 0 !important; padding-left: 0 !important; }
+.comment-list li[class*="depth-"] .comment-content p, .commentlist li[class*="depth-"] .comment-content p { padding-left: 0 !important; }
 .single .comment-author .says, .page .comment-author .says { display: none; }
 .comment-author .fn { font-style: normal; }
 .comment-list li.depth-1 .comment-author .fn, .commentlist li.depth-1 .comment-author .fn { color: #5FB878; }
 .comment-list li.depth-2 .comment-author .fn, .commentlist li.depth-2 .comment-author .fn { color: #a6d8ff; }
 .comment-list li.depth-3 .comment-author .fn, .commentlist li.depth-3 .comment-author .fn { color: #ffb199; }
-.comment-list li.depth-4 .comment-author .fn, .commentlist li.depth-4 .comment-author .fn { color: #cde8d6; }
+.comment-list li.depth-4 .comment-author .fn, .commentlist li.depth-4 .comment-author .fn { color: #16baaa; }
 .comment-list li.depth-5 .comment-author .fn, .commentlist li.depth-5 .comment-author .fn { color: #e1bee7; }
 .comment-list li.depth-1 .comment-author .fn a, .commentlist li.depth-1 .comment-author .fn a { color: #5FB878; }
 .comment-list li.depth-2 .comment-author .fn a, .commentlist li.depth-2 .comment-author .fn a { color: #a6d8ff; }
 .comment-list li.depth-3 .comment-author .fn a, .commentlist li.depth-3 .comment-author .fn a { color: #ffb199; }
-.comment-list li.depth-4 .comment-author .fn a, .commentlist li.depth-4 .comment-author .fn a { color: #cde8d6; }
+.comment-list li.depth-4 .comment-author .fn a, .commentlist li.depth-4 .comment-author .fn a { color: #16baaa; }
 .comment-list li.depth-5 .comment-author .fn a, .commentlist li.depth-5 .comment-author .fn a { color: #e1bee7; }
 
 .comment-list li.depth-1 .reply a, .commentlist li.depth-1 .reply a { color: #5FB878; }
 .comment-list li.depth-2 .reply a, .commentlist li.depth-2 .reply a { color: #a6d8ff; }
 .comment-list li.depth-3 .reply a, .commentlist li.depth-3 .reply a { color: #ffb199; }
-.comment-list li.depth-4 .reply a, .commentlist li.depth-4 .reply a { color: #cde8d6; }
+.comment-list li.depth-4 .reply a, .commentlist li.depth-4 .reply a { color: #16baaa; }
 .comment-list li.depth-5 .reply a, .commentlist li.depth-5 .reply a { color: #e1bee7; }
-.comment-author .fn::after { content: "："; margin-left: 2px; }
+/* .comment-author .fn::after { content: "于";} */
+.comment-meta a::before { content: "于";}
+.comment-meta a::after { content: "说道：";}
+.comment-list li.andu-editable .comment-meta a::before,
+.commentlist li.andu-editable .comment-meta a::before,
+.comment-list li.andu-editable .comment-meta a::after,
+.commentlist li.andu-editable .comment-meta a::after { content: ""; margin: 0; }
 .comment-list .comment-body p, .commentlist .comment-body p { margin: 8px 0; }
-.comment-list .comment-body .comment-author, .commentlist .comment-body .comment-author { margin-bottom: 6px; }
-.comment-list .comment-body .comment-meta, .commentlist .comment-body .comment-meta { margin-bottom: 6px; }
+.comment-list .comment-body .comment-author, .commentlist .comment-body .comment-author,
+.comment-list .comment-body .comment-meta, .commentlist .comment-body .comment-meta { display: inline-block; margin-right: 8px; margin-bottom: 0; vertical-align: middle; }
 .comment-list .comment-body .reply, .commentlist .comment-body .reply { margin-top: 6px; }

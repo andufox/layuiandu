@@ -14,7 +14,7 @@
         <a href="#" class="layui-icon layui-icon-top layui-fixbar-top" id="andu-back-top" style="display:none"></a>
     </div>
     <footer class="footer">
-        <div>© <?php echo date('Y'); ?> <?php bloginfo('name'); ?> · Powered by WordPress · <a href="https://github.com/andufox/layuiandu">Theme: Layui.Andu</a></div>
+        <div>© <?php echo date('Y'); ?> <?php bloginfo('name'); ?> · Powered by <a href="https://wordpress.org/">WordPress</a> ·Theme: <a href="https://github.com/andufox/layuiandu">LayuiAndu</a></div>
     </footer>
 </div>
 <?php wp_footer(); ?>

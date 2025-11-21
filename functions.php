@@ -22,6 +22,7 @@ add_action('wp_enqueue_scripts', function () {
     $accent = '#1a73e8';
     wp_add_inline_style('andu-style', ':root{--accent:' . esc_attr($accent) . '}');
     wp_enqueue_script('andu-layui', $layui_js, [], $js_ver, true);
+    wp_add_inline_script('andu-layui', 'try{if(window.layui){layui.use("element",function(){})}}catch(e){}', 'after');
 });
 
 // content width
@@ -40,15 +41,17 @@ function layuiandu_menu_fallback() {
     echo '</div>';
 }
 
-add_filter('get_avatar', function ($html, $id_or_email, $size, $default, $alt, $args) {
-    if (is_object($id_or_email) && $id_or_email instanceof WP_Comment) { return ''; }
-    return $html;
-}, 9, 6);
+add_filter('get_avatar', function ($html, $id_or_email, $size, $default, $alt, $args) { return ''; }, 9, 6);
+add_filter('pre_option_show_avatars', function($value){ return 0; });
 
-add_filter('nav_menu_css_class', function($classes){
+add_filter('nav_menu_css_class', function($classes, $item, $args, $depth){
     $classes[] = 'layui-nav-item';
+    if (in_array('current-menu-item', $classes, true) || in_array('current-menu-ancestor', $classes, true) || in_array('current_page_item', $classes, true)) {
+        $classes[] = 'layui-this';
+        if (in_array('menu-item-has-children', $classes, true)) { $classes[] = 'layui-nav-itemed'; }
+    }
     return $classes;
-}, 10);
+}, 10, 4);
 
 add_filter('nav_menu_submenu_css_class', function($classes){
     $classes[] = 'layui-nav-child';
@@ -125,6 +128,32 @@ add_filter('comments_open', function($open, $post_id){
     return true;
 }, 99, 2);
 
+add_filter('get_comment_date', function($date, $d, $comment){
+    $ts = get_comment_time('U', true, $comment);
+    return date_i18n('Y-m-d H:i:s', $ts);
+}, 10, 3);
+
+add_filter('get_comment_time', function($time, $d, $comment){
+    return '';
+}, 10, 3);
+
+add_filter('get_the_date', function($the_date, $d, $post){
+    $ts = get_post_time('U', false, $post);
+    return date_i18n('Y-m-d H:i:s', $ts);
+}, 10, 3);
+
+add_filter('get_the_modified_date', function($the_date, $d, $post){
+    $ts = get_post_modified_time('U', false, $post);
+    return date_i18n('Y-m-d H:i:s', $ts);
+}, 10, 3);
+
+add_filter('comment_class', function($classes, $class, $comment_id, $comment, $post_id){
+    if (current_user_can('edit_comment', $comment_id)) {
+        $classes[] = 'andu-editable';
+    }
+    return $classes;
+}, 10, 5);
+
 function andu_render_pagination() {
     global $wp_query;
     if (!$wp_query) return;
@@ -146,7 +175,7 @@ function andu_render_pagination() {
     }
     if ($curr > $max) { $curr = $max; }
     echo '<div id="andu-pagination"></div>';
-    echo '<script>(function(){var links=' . wp_json_encode($links) . ';function init(){if(!window.layui||!layui.laypage){return false;}var laypage=layui.laypage;laypage.render({elem:"andu-pagination",count:' . $found . ',limit:' . $limit . ',curr:' . $curr . ',theme:"#1E9FFF",layout:["prev","page","next"],jump:function(obj,first){if(!first){var url=links[obj.curr]||links[1];location.href=url;}}});return true;}if(!init()){var t=setInterval(function(){if(init()){clearInterval(t);}},80);}})();</script>';
+    echo '<script>(function(){var links=' . wp_json_encode($links) . ';function init(){if(!window.layui||!layui.use){return false}try{layui.use(["laypage"],function(){var laypage=layui.laypage;laypage.render({elem:"andu-pagination",count:' . $found . ',limit:' . $limit . ',curr:' . $curr . ',theme:"#16baaa",layout:["prev","page","next"],jump:function(obj,first){if(!first){var key=String(obj.curr);var url=links[key]||links["1"];if(url){location.href=url;}}}});});return true}catch(e){return false}}if(!init()){var t=setInterval(function(){if(init()){clearInterval(t)}},120)}})();</script>';
 }
 
 add_action('init', function () {
@@ -234,3 +263,30 @@ add_action('init', function () {
     }
     update_option('andu_seed_posts20_done', 1);
 });
+class Layui_Nav_Walker extends Walker_Nav_Menu {
+    public function start_lvl(&$output, $depth = 0, $args = null) {
+        $output .= "\n<dl class=\"layui-nav-child\">\n";
+    }
+    public function end_lvl(&$output, $depth = 0, $args = null) {
+        $output .= "</dl>\n";
+    }
+    public function start_el(&$output, $item, $depth = 0, $args = null, $id = 0) {
+        $classes = empty($item->classes) ? [] : (array)$item->classes;
+        $class_names = trim(implode(' ', array_map('esc_attr', $classes)));
+        $atts = '';
+        if (!empty($item->attr_title)) { $atts .= ' title="' . esc_attr($item->attr_title) . '"'; }
+        if (!empty($item->target)) { $atts .= ' target="' . esc_attr($item->target) . '"'; }
+        if (!empty($item->xfn)) { $atts .= ' rel="' . esc_attr($item->xfn) . '"'; }
+        if (!empty($item->url)) { $atts .= ' href="' . esc_url($item->url) . '"'; }
+        if (in_array('current-menu-item', $classes, true) || in_array('current_page_item', $classes, true)) { $atts .= ' aria-current="page"'; }
+        $title = apply_filters('the_title', $item->title);
+        if ($depth === 0) {
+            $output .= '<li class="layui-nav-item ' . $class_names . '"><a' . $atts . '>' . $title . '</a>';
+        } else {
+            $output .= '<dd class="' . $class_names . '"><a' . $atts . '>' . $title . '</a>';
+        }
+    }
+    public function end_el(&$output, $item, $depth = 0, $args = null) {
+        if ($depth === 0) { $output .= '</li>'; } else { $output .= '</dd>'; }
+    }
+}

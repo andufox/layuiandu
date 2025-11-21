@@ -17,7 +17,13 @@
     <div class="layui-row andu-layout">
         <aside class="layui-col-xs12 layui-col-md2 andu-left">
             <nav class="nav">
-                <?php wp_nav_menu(['theme_location' => 'primary', 'container' => false, 'menu_class' => 'layui-nav layui-nav-tree', 'fallback_cb' => 'layuiandu_menu_fallback']); ?>
+                <?php wp_nav_menu([
+                    'theme_location' => 'primary',
+                    'container' => false,
+                    'menu_class' => 'layui-nav layui-nav-tree',
+                    'fallback_cb' => 'layuiandu_menu_fallback',
+                    'walker' => class_exists('Layui_Nav_Walker') ? new Layui_Nav_Walker() : null,
+                ]); ?>
             </nav>
         </aside>
         <main id="content" class="content layui-col-xs12 layui-col-md8 andu-center">
