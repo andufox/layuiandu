@@ -1,0 +1,132 @@
+/*
+Theme Name: Layui.Andu
+Theme URI: https://github.com/andufox/layuiandu
+Author: Andu
+Description: 基于 Layui 的极简博客主题
+Version: 0.4.0
+License: GPL-2.0-or-later
+Text Domain: layuiandu
+*/
+
+html, body { margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, "Noto Sans", "PingFang SC", "Microsoft YaHei", sans-serif; color: #222; background: #fff; line-height: 1.7; }
+
+.site { max-width: 1140px; margin: 0 auto; padding: 36px 20px; }
+.site-header { margin-bottom: 28px; }
+.site-title { font-size: 28px; font-weight: 700; margin: 0; letter-spacing: 0.2px; }
+.site-description { color: #666; margin-top: 6px; }
+
+.nav { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 12px 16px; }
+.site-title a { color: inherit; text-decoration: none; }
+.post-title a { color: inherit; text-decoration: none; }
+
+.post-list { list-style: none; padding: 0; margin: 0; }
+.post-list::after { content: ""; display: block; clear: both; }
+.post-item { padding: 12px; box-sizing: border-box; }
+.post-item .layui-card { border-bottom: 1px solid #eee; }
+.post-title { font-size: 22px; margin: 0 0 6px; }
+.post-meta { color: #888; font-size: 14px; margin-bottom: 8px; }
+.post-excerpt { color: #333; }
+.read-more { display: inline-block; margin-top: 10px; }
+
+.pagination { display: flex; justify-content: space-between; margin: 24px 0; }
+#andu-pagination { margin: 16px 0; text-align: center; }
+.content { min-height: 50vh; }
+
+.post-content img { max-width: 100%; height: auto; }
+.post-content pre { background: #f6f8fa; padding: 12px; overflow: auto; }
+.post-content blockquote { border-left: 3px solid #ddd; padding-left: 12px; color: #555; }
+
+.footer { margin-top: 40px; color: #777; font-size: 14px; border-top: 1px solid #eee; padding-top: 16px; }
+
+.layui-nav { background: transparent; }
+.layui-card-header h1, .layui-card-header h2 { margin: 0; }
+.layui-card-header { height: auto; line-height: 1.5; }
+.layui-card-header .post-title { display: block; margin-bottom: 8px; line-height: 1.3; }
+.layui-card-header .post-meta { display: block; margin-top: 4px; line-height: 1.5; white-space: normal; }
+
+@media (max-width: 768px) {
+  .layui-card-header { display: block; height: auto; line-height: 1.5; }
+  .layui-card-header .post-title { display: block; margin-bottom: 8px; line-height: 1.3; }
+  .layui-card-header .post-meta { display: block; margin-top: 4px; line-height: 1.5; white-space: normal; }
+  .post-title a { word-break: break-word; overflow-wrap: anywhere; }
+}
+
+/* headings spacing */
+.post-content h1, .post-content h2, .post-content h3 { margin: 20px 0 12px; }
+.post-content ul, .post-content ol { padding-left: 22px; }
+.post-content table { border-collapse: collapse; width: 100%; }
+.post-content table td, .post-content table th { border: 1px solid #eee; padding: 8px; }
+.layui-nav { background: transparent; }
+.layui-card-header h1, .layui-card-header h2 { margin: 0; }
+
+.comment-form .form-submit { margin-top: 12px; }
+.comment-form .comment-notes { color: #999; }
+.search-form .layui-btn { margin-top: 12px; }
+
+/* single post spacing */
+.single .layui-card-header { margin-bottom: 12px; }
+.single .post-meta { margin-bottom: 12px; }
+.single .post-content { margin-top: 8px; }
+.single .layui-card-body { padding-top: 8px; }
+
+.search-highlight { background: #FF5722; color: #fff; border-radius: 2px; padding: 0 2px; }
+
+.single h3#comments { color: #999; font-weight: 500; }
+.comment-list, .commentlist { list-style: none; padding: 0; margin: 0; }
+.comment-list li.comment, .commentlist li.comment { border: 1px solid #eee; border-radius: 4px; padding: 10px; margin-bottom: 10px; }
+.comment-list .children, .commentlist .children { margin-left: 4px; }
+.comment-list .children li.comment, .commentlist .children li.comment { border-color: #f2f2f2; }
+.single .comment-meta, .single .comment-meta a { color: #999; }
+.single .comment-body .avatar { display: none; }
+.comment-list .children, .commentlist .children { margin-top: 4px; }
+.comment-list .comment-content p, .commentlist .comment-content p { margin: 8px 0; }
+.comment-list .children .comment-body, .commentlist .children .comment-body { border-left: 1px solid #eee; padding-left: 2px; margin-left: 2px; }
+.comment-list .children .comment-content p, .commentlist .children .comment-content p { padding-left: 12px; }
+.comment-list .children .children .comment-body, .commentlist .children .children .comment-body { border-left-color: #e6e6e6; margin-left: 24px; }
+.comment-list .children .children .comment-content p, .commentlist .children .children .comment-content p { padding-left: 24px; }
+.comment-list .children .children .children .comment-body, .commentlist .children .children .children .comment-body { border-left-color: #ddd; margin-left: 36px; }
+.comment-list .children .children .children .comment-content p, .commentlist .children .children .children .comment-content p { padding-left: 36px; }
+.comment-list li.depth-2 .comment-content p, .commentlist li.depth-2 .comment-content p { padding-left: 12px; }
+.comment-list li.depth-3 .comment-content p, .commentlist li.depth-3 .comment-content p { padding-left: 24px; }
+.comment-list li.depth-4 .comment-content p, .commentlist li.depth-4 .comment-content p { padding-left: 36px; }
+.comment-list li.depth-2 .comment-body, .commentlist li.depth-2 .comment-body { border-left: 1px solid #eee; padding-left: 2px; margin-left: 2px; }
+.comment-list li.depth-3 .comment-body, .commentlist li.depth-3 .comment-body { border-left-color: #e6e6e6; margin-left: 24px; padding-left: 12px; }
+.comment-list li.depth-4 .comment-body, .commentlist li.depth-4 .comment-body { border-left-color: #ddd; margin-left: 36px; padding-left: 12px; }
+
+/* depth color palette */
+.comment-list li.depth-1.comment, .commentlist li.depth-1.comment { border-color: #e0e0e0; }
+.comment-list li.depth-2.comment, .commentlist li.depth-2.comment { border-color: #a6d8ff; }
+.comment-list li.depth-3.comment, .commentlist li.depth-3.comment { border-color: #ffb199; }
+.comment-list li.depth-4.comment, .commentlist li.depth-4.comment { border-color: #cde8d6; }
+.comment-list li.depth-5.comment, .commentlist li.depth-5.comment { border-color: #e1bee7; }
+
+.comment-list li.depth-1 .comment-body, .commentlist li.depth-1 .comment-body { border-left-color: #e0e0e0; }
+.comment-list li.depth-2 .comment-body, .commentlist li.depth-2 .comment-body { border-left-color: #a6d8ff; }
+.comment-list li.depth-3 .comment-body, .commentlist li.depth-3 .comment-body { border-left-color: #ffb199; }
+.comment-list li.depth-4 .comment-body, .commentlist li.depth-4 .comment-body { border-left-color: #cde8d6; }
+.comment-list li.depth-5 .comment-body, .commentlist li.depth-5 .comment-body { border-left-color: #e1bee7; }
+.comment-list .comment-body, .commentlist .comment-body { border-left: none !important; }
+.single .comment-author .says { display: none; }
+.comment-author .fn { font-style: normal; }
+.comment-list li.depth-1 .comment-author .fn, .commentlist li.depth-1 .comment-author .fn { color: #e0e0e0; }
+.comment-list li.depth-2 .comment-author .fn, .commentlist li.depth-2 .comment-author .fn { color: #a6d8ff; }
+.comment-list li.depth-3 .comment-author .fn, .commentlist li.depth-3 .comment-author .fn { color: #ffb199; }
+.comment-list li.depth-4 .comment-author .fn, .commentlist li.depth-4 .comment-author .fn { color: #cde8d6; }
+.comment-list li.depth-5 .comment-author .fn, .commentlist li.depth-5 .comment-author .fn { color: #e1bee7; }
+.comment-list li.depth-1 .comment-author .fn a, .commentlist li.depth-1 .comment-author .fn a { color: #e0e0e0; }
+.comment-list li.depth-2 .comment-author .fn a, .commentlist li.depth-2 .comment-author .fn a { color: #a6d8ff; }
+.comment-list li.depth-3 .comment-author .fn a, .commentlist li.depth-3 .comment-author .fn a { color: #ffb199; }
+.comment-list li.depth-4 .comment-author .fn a, .commentlist li.depth-4 .comment-author .fn a { color: #cde8d6; }
+.comment-list li.depth-5 .comment-author .fn a, .commentlist li.depth-5 .comment-author .fn a { color: #e1bee7; }
+
+.comment-list li.depth-1 .reply a, .commentlist li.depth-1 .reply a { color: #e0e0e0; }
+.comment-list li.depth-2 .reply a, .commentlist li.depth-2 .reply a { color: #a6d8ff; }
+.comment-list li.depth-3 .reply a, .commentlist li.depth-3 .reply a { color: #ffb199; }
+.comment-list li.depth-4 .reply a, .commentlist li.depth-4 .reply a { color: #cde8d6; }
+.comment-list li.depth-5 .reply a, .commentlist li.depth-5 .reply a { color: #e1bee7; }
+.comment-author .fn::after { content: "："; margin-left: 2px; }
+.comment-list .comment-body p, .commentlist .comment-body p { margin: 8px 0; }
+.comment-list .comment-body .comment-author, .commentlist .comment-body .comment-author { margin-bottom: 6px; }
+.comment-list .comment-body .comment-meta, .commentlist .comment-body .comment-meta { margin-bottom: 6px; }
+.comment-list .comment-body .reply, .commentlist .comment-body .reply { margin-top: 6px; }
