@@ -8,6 +8,10 @@
 
 ![LayuiAndu 截图](./screenshot.png)
 
+## demo
+
+- [LayuiAndu 演示站点](https://690003.xyz/)
+
 ## 特性
 
 - 轻量、简洁，适合个人博客与技术文章
@@ -38,6 +42,10 @@
 ## 许可
 
 - GPL-2.0-or-later
+
+## 捐赠
+
+
 
 ## Star 历史
 
